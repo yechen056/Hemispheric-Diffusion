@@ -1,6 +1,6 @@
 <div align="center">
 
-# <img src="assets/HemiDiff.png" alt="HemiDiff logo" height="36" style="vertical-align: middle;" /> Hemispheric Diffusion
+# <img src="assets/HemiDiff.png" alt="HemiDiff logo" height="50" style="vertical-align: middle;" /> Hemispheric Diffusion
 
 [![Project Page](https://img.shields.io/badge/Project-Page-green.svg)](https://yechen056.github.io/HemiDiff/)
 [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](#)
