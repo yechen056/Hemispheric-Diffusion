@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>
+<h1 style="font-size:64px;">
 <img src="assets/HemiDiff.png" height="50" style="vertical-align: middle; margin-right:12px;">
 Hemispheric Diffusion
 </h1>
