@@ -1,0 +1,12 @@
+[submodule "third_party/YARR"]
+	path = third_party/YARR
+	url = https://github.com/yechen056/YARR
+[submodule "third_party/PyRep"]
+	path = third_party/PyRep
+	url = https://github.com/yechen056/PyRep
+[submodule "third_party/RLBench"]
+	path = third_party/RLBench
+	url = https://github.com/yechen056/RLBench
+[submodule "third_party/pytorch3d"]
+	path = third_party/pytorch3d
+	url = https://github.com/yechen056/pytorch3d
