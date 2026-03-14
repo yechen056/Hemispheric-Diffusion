@@ -3,6 +3,7 @@
 # <img src="assets/HemiDiff.png" alt="HemiDiff logo" height="36" style="vertical-align: middle;" /> Hemispheric Diffusion
 
 **A Compositional Generative Policy for Coordinated Bimanual Manipulation**
+
 [![Project Page](https://img.shields.io/badge/Project-Page-green.svg)](https://yechen056.github.io/HemiDiff/)
 [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
