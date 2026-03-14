@@ -1,8 +1,13 @@
 <div align="center">
 
-# <img src="assets/HemiDiff.png" alt="HemiDiff logo" height="36" style="vertical-align: middle;" /> Hemispheric Diffusion
+<h1>
+<img src="assets/HemiDiff.png" height="40" style="vertical-align:middle; margin-right:10px;">
+Hemispheric Diffusion
+</h1>
 
-**A Compositional Generative Policy for Coordinated Bimanual Manipulation**
+<b>A Compositional Generative Policy for Coordinated Bimanual Manipulation</b>
+
+</div>
 
 [![Project Page](https://img.shields.io/badge/Project-Page-green.svg)](https://yechen056.github.io/HemiDiff/)
 [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](#)
