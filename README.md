@@ -52,8 +52,8 @@ conda create -n hemidiff python=3.9 -y
 conda activate hemidiff
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
 
-git clone https://github.com/yechen056/HemiDiff.git
-cd HemiDiff
+git clone --recursive https://github.com/yechen056/Hemispheric-Diffusion.git
+cd Hemispheric-Diffusion
 
 pip install -r requirements.txt
 pip install -e .
