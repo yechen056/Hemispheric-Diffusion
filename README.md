@@ -5,8 +5,6 @@
 Hemispheric Diffusion
 </h1>
 
-</div>
-
 [![Project Page](https://img.shields.io/badge/Project-Page-green.svg)](https://yechen056.github.io/HemiDiff/)
 [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
