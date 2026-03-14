@@ -1,0 +1,184 @@
+defaults:
+  - _self_
+  - perception
+  - task: rlbench/coordinated_push_box
+
+name: train_hemi_rgb_pcd_dino
+_target_: hemidiff.workspace.train_policy.TrainPolicyWorkspace
+
+task_name: ${task.name}
+shape_meta: ${task.shape_meta}
+exp_name: "rgb_pcd_dino_spatial_asymmetric"
+
+horizon: 16
+n_obs_steps: 2
+n_action_steps: 8
+dataset_obs_steps: ${n_obs_steps}
+keypoint_visible_rate: 1.0
+
+policy:
+  _target_: hemidiff.policy.consensus_composer_policy.ConsensusComposerPolicy
+  
+  shape_meta: ${shape_meta}
+  active_slices: [[0, 9], [9, 18]]
+  policy_weights: [1.0, 1.0]
+  horizon: ${horizon}
+  n_action_steps: ${n_action_steps}
+  n_obs_steps: ${n_obs_steps}
+  
+  noise_scheduler:
+    _target_: diffusers.schedulers.scheduling_ddpm.DDPMScheduler
+    num_train_timesteps: 100
+    beta_start: 0.0001
+    beta_end: 0.02
+    beta_schedule: squaredcos_cap_v2
+    variance_type: fixed_small
+    clip_sample: True
+    prediction_type: epsilon
+
+  modular_policies:
+    - _target_: hemidiff.policy.consensus_router_policy.ConsensusRouterPolicy
+      noise_scheduler: ${policy.noise_scheduler}
+      action_dim: 9
+      shape_meta: ${shape_meta}
+      asymmetric_routing: True
+      num_modules: 3
+      composition_strategy: "soft_gating"
+      obs_encoders:
+        - _target_: hemidiff.model.perception.model_factory.create_rgb_encoder
+          _recursive_: False
+          to_use: "RobomimicRgbEncoder"
+          model_library: ${rgb_encoder}
+      
+        - _target_: hemidiff.model.perception.model_factory.create_pointcloud_encoder
+          _recursive_: False
+          to_use: "Dp3PointcloudEncoder"
+          model_library: ${pointcloud_encoder}
+
+        - _target_: hemidiff.model.perception.model_factory.create_dino_pointcloud_encoder
+          _recursive_: False
+          to_use: "DinoDp3PointcloudEncoder"
+          model_library: ${dino_encoder}
+      
+      horizon: ${horizon}
+      n_action_steps: ${n_action_steps}
+      n_obs_steps: ${n_obs_steps}
+      
+      diffusion_step_embed_dim: 128
+      down_dims: [128, 256, 512] 
+      kernel_size: 5
+      n_groups: 8
+
+    - _target_: hemidiff.policy.consensus_router_policy.ConsensusRouterPolicy
+      noise_scheduler: ${policy.noise_scheduler}
+      action_dim: 9
+      shape_meta: ${shape_meta}
+      asymmetric_routing: True
+      num_modules: 3
+      composition_strategy: "soft_gating"
+      
+      obs_encoders:
+        - _target_: hemidiff.model.perception.model_factory.create_rgb_encoder
+          _recursive_: False
+          to_use: "RobomimicRgbEncoder"
+          model_library: ${rgb_encoder}
+          
+        - _target_: hemidiff.model.perception.model_factory.create_pointcloud_encoder
+          _recursive_: False
+          to_use: "Dp3PointcloudEncoder"
+          model_library: ${pointcloud_encoder}
+          
+        - _target_: hemidiff.model.perception.model_factory.create_dino_pointcloud_encoder
+          _recursive_: False
+          to_use: "DinoDp3PointcloudEncoder"
+          model_library: ${dino_encoder}
+          
+      horizon: ${horizon}
+      n_action_steps: ${n_action_steps}
+      n_obs_steps: ${n_obs_steps}
+      
+      diffusion_step_embed_dim: 128
+      down_dims: [128, 256, 512]
+      kernel_size: 5
+      n_groups: 8
+
+ema:
+  _target_: hemidiff.model.diffusion.ema_model.EMAModel
+  update_after_step: 0
+  inv_gamma: 1.0
+  power: 0.75
+  min_value: 0.0
+  max_value: 0.9999
+
+dataloader:
+  batch_size: 64 
+  num_workers: 4
+  shuffle: True
+  pin_memory: True
+  persistent_workers: False
+
+val_dataloader:
+  batch_size: 64
+  num_workers: 4
+  shuffle: False
+  pin_memory: True
+  persistent_workers: False
+
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 1.0e-4
+  betas: [0.95, 0.999]
+  eps: 1.0e-8
+  weight_decay: 1.0e-6
+
+training:
+  num_demo: 100
+  device: "cuda:0"
+  seed: 42
+  debug: False
+  resume: True
+  cuda_kernel_tuning: True
+  lr_scheduler: cosine
+  lr_warmup_steps: 500
+  num_epochs: 1001
+  gradient_accumulate_every: 1
+  use_ema: True
+  freeze_encoder: False
+  rollout_every: 50
+  checkpoint_every: 50
+  val_every: 50
+  sample_every: 50
+  max_train_steps: null
+  max_val_steps: null
+  tqdm_interval_sec: 1.0
+
+logging:
+  project: sim_bimanual_full_sota
+  resume: True
+  mode: online
+  name: ${now:%Y%m%d.%H%M%S}_${name}_${task_name}
+  tags: ["rgb", "pcd", "dino", "spatial", "asymmetric"]
+  id: null
+  group: null
+
+checkpoint:
+  topk:
+    monitor_key: mean_success_rate
+    mode: max
+    k: 5
+    format_str: 'ep-{epoch:04d}_sr-{mean_success_rate:.3f}.ckpt'
+  save_last_ckpt: True
+  save_last_snapshot: False
+
+multi_run:
+  run_dir: output/${now:%Y%m%d}/${now:%H%M%S}_${name}_${task_name}
+  wandb_name_base: ${now:%Y%m%d.%H%M%S}_${name}_${task_name}
+
+hydra:
+  job:
+    override_dirname: ${name}
+  run:
+    dir: output/${now:%Y%m%d}/${now:%H%M%S}_${name}_${task_name}
+  sweep:
+    dir: output/${now:%Y%m%d}/${now:%H%M%S}_${name}_${task_name}
+    subdir: ${hydra.job.num}

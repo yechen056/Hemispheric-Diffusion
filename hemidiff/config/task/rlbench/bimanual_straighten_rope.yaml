@@ -1,0 +1,97 @@
+name: rb-bimanual_straighten_rope
+
+task_name: bimanual_straighten_rope
+lazy_eval: True
+
+shape_meta: &shape_meta
+  obs:
+    front_rgb:
+      shape: [3, 128, 128]
+      type: rgb
+    overhead_rgb:
+      shape: [3, 128, 128]
+      type: rgb
+    wrist_left_rgb:
+      shape: [3, 128, 128]
+      type: rgb
+    wrist_right_rgb:
+      shape: [3, 128, 128]
+      type: rgb
+    over_shoulder_left_rgb:
+      shape: [3, 128, 128]
+      type: rgb
+    over_shoulder_right_rgb:
+      shape: [3, 128, 128]
+      type: rgb
+    fused_pointcloud:
+      shape: [512, 3]
+      type: pointcloud
+    fused_dino:
+      shape: [512, 6] # 3 xyz + 3 pca_features
+      type: dino_pointcloud
+    joint_positions:
+      shape: [14]
+      type: robot_state
+    gripper_joint_positions:
+      shape: [4]
+      type: robot_state
+  action:
+    shape: [18]
+
+
+env_runner:
+  _target_: hemidiff.env_runner.rlbench_runner.RlbenchRunner
+  task_name: ${task_name}
+  n_test: 5
+  n_test_vis: 1
+  n_obs_steps: ${n_obs_steps}
+  n_action_steps: ${n_action_steps}
+  fps: 10
+  n_parallel_envs: 1
+  image_size: 128
+
+  num_points: ${oc.select:shape_meta.obs.fused_pointcloud.shape.0, null}
+  enable_depth: True
+  enable_dino: True
+
+  robot_setup: 'dual_panda'
+
+  camera_names: [
+    'front',
+    'overhead',
+    'wrist_left',
+    'wrist_right',
+    'over_shoulder_left',
+    'over_shoulder_right'
+  ]
+
+  robot_state_ports:
+    - joint_positions
+    - gripper_joint_positions
+  max_episode_steps: 250
+  zarr_path: ${task.dataset.zarr_path}
+  image_scale: 1.0
+
+dataset:
+  _target_: hemidiff.dataset.rlbench_dataset.RlbenchDataset
+  zarr_path: data/rlbench/bimanual_straighten_rope_expert_100.zarr
+  obs_keys:
+    - front_rgb
+    - overhead_rgb
+    - wrist_left_rgb
+    - wrist_right_rgb
+    - over_shoulder_left_rgb
+    - over_shoulder_right_rgb
+    - joint_positions
+    - gripper_joint_positions
+    - fused_pointcloud
+    - fused_dino
+
+  action_key: action
+  horizon: ${horizon}
+  pad_before: ${eval:'${n_obs_steps}-1'}
+  pad_after: ${eval:'${n_action_steps}-1'}
+  seed: 42
+  val_ratio: 0.1
+  max_train_episodes: null
+  image_scale: 1.0
