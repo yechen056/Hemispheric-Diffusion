@@ -1,0 +1,81 @@
+name: hemidiff
+channel_priority: strict
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+  - pytorch3d
+  - fvcore
+  - iopath
+  - defaults
+  - menpo
+
+dependencies:
+  - python=3.9
+  - pip
+  - wheel
+  - setuptools<81
+
+  # CUDA / Torch stack
+  - cuda-toolkit=12.1
+  - pytorch-cuda=12.1
+  - pytorch=2.1.0
+  - torchvision=0.16.0
+  - pytorch3d=0.7.7
+
+  # Rendering / EGL / X11 (for headless RLBench + PyRep)
+  - glew
+  - mesalib
+  - glfw3
+  - xorg-libx11
+  - xorg-xproto
+  - xorg-libxext
+  - eigen=3.4.0
+
+  # Core libs resolved well in the current working env
+  - fvcore=0.1.5.post20221221
+  - iopath=0.1.10
+  - scikit-video=1.1.11
+
+  - pip:
+      # Local editable third_party packages are installed after env creation:
+      #   pip install -e third_party/PyRep
+      #   pip install -e third_party/RLBench
+      #   pip install -e third_party/YARR --no-deps
+      #   pip install -e third_party/pytorch3d --no-build-isolation
+
+      # Core project/runtime
+      - numpy==1.26.4
+      - scipy==1.13.1
+      - pandas==2.3.3
+      - scikit-learn==1.6.1
+      - numba==0.60.0
+      - matplotlib==3.9.4
+      - Pillow==10.4.0
+      - opencv-python==4.10.0.84
+      - imageio==2.37.2
+      - imageio-ffmpeg==0.6.0
+      - h5py==3.14.0
+      - zarr==2.18.2
+      - numcodecs==0.12.1
+      - click==8.1.8
+      - cloudpickle==3.1.2
+      - dill==0.4.0
+      - tqdm==4.67.1
+      - joblib==1.5.3
+
+      # Training / config / logging
+      - hydra-core==1.3.2
+      - omegaconf==2.3.0
+      - diffusers==0.20.1
+      - einops==0.7.0
+      - wandb==0.23.1
+      - sentence-transformers==2.2.2
+
+      # Env / simulation stack
+      - gymnasium==1.0.0a2
+      - robomimic==0.2.0
+      - robosuite==1.4.0
+      - open3d==0.18.0
+      - av==15.1.0
+      - pyrep==4.1.0.3
