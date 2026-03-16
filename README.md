@@ -1,6 +1,6 @@
 <div align="center">
 
-# <img src="assets/HemiDiff.png" alt="HemiDiff logo" height="32" style="vertical-align: middle;" /> Hemispheric Diffusion
+# <img src="assets/HemiDiff.png" alt="HemiDiff logo" height="34" style="vertical-align: middle;" /> Hemispheric Diffusion
 
 **A Compositional Generative Policy for Coordinated Bimanual Manipulation**
 
