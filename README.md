@@ -145,7 +145,7 @@ We provide the `coordinated_put_item_in_drawer` task assets on Hugging Face:
 
 - Dataset (100 demos): [Download from Hugging Face](https://huggingface.co/datasets/yechen056/drawer/resolve/main/coordinated_put_item_in_drawer_expert_100.zarr.zip)
 - Model: [Download from Hugging Face](https://huggingface.co/yechen056/drawer/resolve/main/latest.zip)
-> 💡 Extract the model to output/checkpoints/ and the dataset to data/rlbench/.
+> 💡 Extract the model to `output/checkpoints/` and the dataset to `data/rlbench/`.
 
 ### 🚆 2. Train
 
