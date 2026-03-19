@@ -76,7 +76,7 @@ Add to `~/.bashrc`:
 
 ```bash
 export COPPELIASIM_ROOT=${HOME}/.coppeliasim
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$COPPELIASIM_ROOT
+export LD_LIBRARY_PATH=LDLIBRARYPATH:LD_LIBRARY_PATH:COPPELIASIM_ROOT
 export QT_QPA_PLATFORM_PLUGIN_PATH=$COPPELIASIM_ROOT
 ```
 
@@ -141,6 +141,11 @@ Supported simulation tasks:
 - `coordinated_put_item_in_drawer`
 - `dual_push_buttons`
 
+We provide the `coordinated_put_item_in_drawer` task assets on Hugging Face:
+
+- Dataset (100 demos): [Download from Hugging Face](https://huggingface.co/datasets/yechen056/drawer/resolve/main/coordinated_put_item_in_drawer_expert_100.zarr.zip)
+- Model: [Download from Hugging Face](https://huggingface.co/yechen056/drawer/resolve/main/latest.zip)
+- 
 ### 🚆 2. Train
 
 ```bash
