@@ -49,7 +49,7 @@
 > 💡 We recommend using `mamba` for environment setup. If this step fails, see **Section 4 (Manual Installation)**.
 
 ```bash
-git clone --recursive https://github.com/yechen056/Hemispheric-Diffusion.git
+git clone https://github.com/yechen056/Hemispheric-Diffusion.git
 cd Hemispheric-Diffusion
 
 conda install -n base -c conda-forge mamba -y
