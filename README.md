@@ -16,8 +16,6 @@
 
 *Equal contribution &nbsp;&nbsp; †Corresponding author
 
-**[[Project Page](https://yechen056.github.io/HemiDiff/)] | [[Paper](#)]**
-
 </div>
 
 <div align="center">
