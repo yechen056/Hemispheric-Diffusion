@@ -10,9 +10,9 @@
 [![Python 3.9](https://img.shields.io/badge/Python-3.9-blue.svg)](https://www.python.org/)
 [![PyTorch 2.1](https://img.shields.io/badge/PyTorch-2.1-ee4c2c.svg)](https://pytorch.org/)
 
-[Yechen Fan](https://github.com/yechen056)<sup>1,2*</sup>, [Jinhua Ye](#)<sup>1,2*</sup>, [Xinyou Ji](#)<sup>1</sup>, [Haibin Wu](#)<sup>1</sup>, [Gengfeng Zheng](#)<sup>2†</sup> and [Huixin He](#)<sup>3†</sup>
+[Yechen Fan](https://github.com/yechen056)<sup>1,2*</sup>, [Jinhua Ye](#)<sup>1,2*</sup>, [Xinyou Ji](#)<sup>1</sup>, [Chenyang Song](#)<sup>3</sup>, [Haibin Wu](#)<sup>1</sup>, [Gengfeng Zheng](#)<sup>3†</sup> and [Jiafu Wan](#)<sup>4†</sup>
 
-<sup>1</sup> Fuzhou University &nbsp;&nbsp; <sup>2</sup> Fujian Key Laboratory of Special Intelligent Equipment Safety Measurement and Control &nbsp;&nbsp; <sup>3</sup> Huaqiao University
+<sup>1</sup> Fuzhou University &nbsp;&nbsp; <sup>2</sup> Fujian Key Laboratory of Special Intelligent Equipment Safety Measurement and Control &nbsp;&nbsp; <sup>3</sup> Beihang University &nbsp;&nbsp; <sup>4</sup> South China University of Technology
 
 *Equal contribution &nbsp;&nbsp; †Corresponding author
 
