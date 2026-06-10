@@ -14,8 +14,6 @@
 
 <sup>1</sup> Fuzhou University &nbsp;&nbsp; <sup>2</sup> Fujian Key Laboratory of Special Intelligent Equipment Safety Measurement and Control &nbsp;&nbsp; <sup>3</sup> Beihang University &nbsp;&nbsp; <sup>4</sup> South China University of Technology
 
-*Equal contribution &nbsp;&nbsp; †Corresponding author
-
 </div>
 
 <div align="center">
