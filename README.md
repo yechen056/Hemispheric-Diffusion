@@ -119,7 +119,7 @@ cd ../../
 
 ## 🚀 Quick Start
 
-### 🗂️ 1. Generate Demonstrations
+### 🗂️ 1. Generate Data
 
 ```bash
 python scripts/gen_rlbench_bimanual_data.py gen rlbench -t coordinated_push_box -c 100
@@ -143,7 +143,7 @@ We provide the `coordinated_put_item_in_drawer` task assets on Hugging Face:
 - Model: [Download from Hugging Face](https://huggingface.co/yechen056/drawer/resolve/main/latest.zip)
 > 💡 Extract the model to `output/checkpoints/` and the dataset to `data/rlbench/`.
 
-### 🚆 2. Train
+### 🚆 2. Training
 
 ```bash
 python scripts/train.py \
@@ -152,7 +152,7 @@ python scripts/train.py \
   task.dataset.zarr_path=data/rlbench/coordinated_push_box_expert_100.zarr
 ```
 
-### 🎯 3. Evaluate
+### 🎯 3. Evaluation
 
 ```bash
 python scripts/eval.py \
@@ -164,17 +164,6 @@ python scripts/eval.py \
 > 💡 Rollout videos are saved to `output/eval/media/`.
 
 ---
-
-<!-- ## 📝 Citation
-
-```bibtex
-@article{fan2026hemisphericdiffusion,
-  title={Hemispheric Diffusion: A Compositional Generative Policy for Coordinated Bimanual Manipulation},
-  author={Fan, Yechen and Ye, Jinhua and Ji, Xianyou and Song, Chenyang and Wu, Haibin and Zheng, Gengfeng and Wan, Jiafu},
-  journal={IEEE Robotics and Automation Letters},
-  year={2026}
-}
-``` -->
 
 ## 📄 License
 
